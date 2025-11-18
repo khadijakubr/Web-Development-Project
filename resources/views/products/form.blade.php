@@ -1,0 +1,32 @@
+@extends('layouts.app')
+
+@section('title', $product ? 'Edit Product' : 'Add Product')
+
+@section('content')
+<h1>{{ $product ? 'Edit Product' : 'Add Product' }}</h1>
+
+<form action="{{ $action }}" method="POST">
+  @csrf
+
+  <div class="mb-3">
+    <label for="name" class="form-label">Name</label>
+    <input id="name" name="name" type="text" class="form-control" value="{{ old('name', $product['name'] ?? '') }}" required>
+    @error('name') <div class="text-danger">{{ $message }}</div> @enderror
+  </div>
+
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea id="description" name="description" class="form-control">{{ old('description', $product['description'] ?? '') }}</textarea>
+    @error('description') <div class="text-danger">{{ $message }}</div> @enderror
+  </div>
+
+  <div class="mb-3">
+    <label for="price" class="form-label">Price</label>
+    <input id="price" name="price" type="number" class="form-control" value="{{ old('price', $product['price'] ?? '') }}" required>
+    @error('price') <div class="text-danger">{{ $message }}</div> @enderror
+  </div>
+
+  <button type="submit" class="btn btn-success">Save</button>
+  <a href="{{ route('products') }}" class="btn btn-secondary">Cancel</a>
+</form>
+@endsection
