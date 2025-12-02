@@ -3,71 +3,109 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Product;    
+use App\Models\Category;
 
 class ProductController extends Controller
 {
-    // Initialize demo products in session (only once)
-    private function demoProducts()
-    {
-        if (!session()->has('products')) {
-            $products = [];
-            for ($i = 1; $i <= 20; $i++) {
-                $products[] = [
-                    'id' => $i,
-                    'name' => "Product $i",
-                    'description' => "Deskripsi singkat produk $i",
-                    'price' => rand(10, 500)
-                ];
-            }
-            session(['products' => $products]);
-        }
-        return session('products');
-    }
-
     // GET /products
-    public function index()
+    public function index(Request $request)
     {
-        $products = $this->demoProducts();
-        return view('products.list', compact('products'));
+        // Ambil semua kategori untuk filter
+        $categories = Category::all();
+
+        // Mulai query produk dengan relasi kategori
+        $query = Product::with('category');
+
+        // Cari berdasarkan nama atau deskripsi
+        if ($search = $request->input('q')) {
+            $query->where(function($q) use ($search) {
+                $q->where('name', 'like', "%{$search}%")
+                ->orWhere('description', 'like', "%{$search}%");
+            });
+        }
+
+        // Filter kategori 
+        if ($categoryId = $request->input('category_id')) {
+            $query->where('category_id', $categoryId);
+        }
+
+        // Filter range harga
+        if (!is_null($request->input('price_min'))) {
+            $query->where('price', '>=', $request->input('price_min'));
+        }
+        if (!is_null($request->input('price_max'))) {
+            $query->where('price', '<=', $request->input('price_max'));
+        }
+
+        // Sorting
+        switch ($request->input('sort')) {
+            case 'name_asc':
+                $query->orderBy('name', 'asc');
+                break;
+            case 'name_desc':
+                $query->orderBy('name', 'desc');
+                break;
+            case 'price_asc':
+                $query->orderBy('price', 'asc');
+                break;
+            case 'price_desc':
+                $query->orderBy('price', 'desc');
+                break;
+            default:
+                $query->latest(); // urut default: newest
+        }
+
+        // Pagination (12 item per halaman) dan jaga query string di link paginasi
+        $products = $query->paginate(12)->appends($request->all());
+        return view('products.list', compact('products', 'categories'));
     }
 
     // GET /products/create
     public function create()
     {
-        return view('products.form', ['action' => route('products.store'), 'product' => null]);
+                $categories = Category::all();
+
+        return view('products.form', [
+            'action' => route('products.store'),
+            'product' => null,
+            'categories' => $categories
+        ]);
     }
 
     // GET /products/edit/{id}
     public function edit($id)
     {
-        $product = collect($this->demoProducts())->firstWhere('id', (int)$id);
+        $product = Product::find($id);
+
         if (!$product) {
             return redirect()->route('products')->with('error', 'Produk tidak ditemukan.');
         }
-        return view('products.form', ['action' => route('products.update', ['id' => $id]), 'product' => $product]);
+
+        $categories = Category::all();
+
+        return view('products.form', [
+            'action' => route('products.update', ['id' => $id]),
+            'product' => $product,
+            'categories' => $categories
+        ]);
     }
 
     // POST /products/store
     public function store(Request $request)
     {
+        // Validasi input
         $data = $request->validate([
-            'name' => 'required|string',
+            'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
-        $products = $this->demoProducts();
-        $newId = count($products) + 1;
-        
-        $products[] = [
-            'id' => $newId,
-            'name' => $data['name'],
-            'description' => $data['description'],
-            'price' => $data['price']
-        ];
-        
-        session(['products' => $products]);
+        // Buat produk baru lewat Eloquent
+        $product = Product::create($data);
 
+        // Redirect ke halaman daftar atau show produk dengan pesan sukses
         return redirect()->route('products')->with('success', 'Produk berhasil disimpan!');
     }
 
@@ -75,36 +113,28 @@ class ProductController extends Controller
     public function update(Request $request, $id)
     {
         $data = $request->validate([
-            'name' => 'required|string',
+            'name' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'price' => 'required|numeric',
+            'price' => 'required|numeric|min:0',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
-        $products = $this->demoProducts();
-        $index = collect($products)->search(fn($p) => $p['id'] == (int)$id);
-
-        if ($index === false) {
+        $product = Product::find($id);
+        if (!$product) {
             return redirect()->route('products')->with('error', 'Produk tidak ditemukan.');
         }
 
-        $products[$index] = [
-            'id' => (int)$id,
-            'name' => $data['name'],
-            'description' => $data['description'],
-            'price' => $data['price']
-        ];
+        $product->update($data);
 
-        session(['products' => $products]);
-
-        return redirect()->route('products.show', ['id' => $id])->with('success', 'Produk berhasil diupdate!');
+        return redirect()->route('products.show', ['id' => $product->id])->with('success', 'Produk berhasil diupdate!');
     }
 
     // GET /products/show/{id}
     public function show($id)
     {
-        $product = collect($this->demoProducts())->firstWhere('id', (int)$id);
+        $product = Product::with('category')->find($id);
         if (!$product) {
-            return redirect()->route('products')->with('error', 'Produk tidak ditemukan.');
+            return redirect()->route('products.index')->with('error', 'Produk tidak ditemukan.');
         }
         return view('products.show', compact('product'));
     }

@@ -8,6 +8,7 @@ Route::get('/', function () {
 });
 
 Route::prefix('products')->controller(ProductController::class)->group(function () {
+    Route::get('/products', 'index')->name('products.index');
     Route::get('/', 'index')->name('products');                     // GET /products
     Route::get('/create', 'create')->name('products.create');       // GET /products/create
     Route::get('/edit/{id}', 'edit')->name('products.edit');        // GET /products/edit/{id}
