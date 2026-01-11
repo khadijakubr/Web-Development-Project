@@ -1,11 +1,11 @@
-@extends('layouts.app')
+<!-- @extends('layouts.app')
 
 @section('title', $product ? 'Edit Product' : 'Add Product')
 
 @section('content')
 <h1>{{ $product ? 'Edit Product' : 'Add Product' }}</h1>
 
-<form action="{{ $action }}" method="POST">
+<form action="{{ $action }}" method="POST" enctype="multipart/form-data">
   @csrf
 
   <div class="mb-3">
@@ -40,7 +40,20 @@
     @error('price') <div class="text-danger">{{ $message }}</div> @enderror
   </div>
 
+  <div class="mb-3">
+    <label for="image" class="form-label">Product Image</label>
+    <input id="image" name="image" type="file" class="form-control">
+
+    @if($product && $product->image)
+      <img src="{{ asset('storage/' . $product->image) }}"
+          class="mt-2"
+          style="max-height:150px;">
+    @endif
+
+    @error('image') <div class="text-danger">{{ $message }}</div> @enderror
+  </div>
+
   <button type="submit" class="btn btn-success">Save</button>
   <a href="{{ route('products') }}" class="btn btn-secondary">Cancel</a>
 </form>
-@endsection
+@endsection -->

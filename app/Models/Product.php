@@ -8,7 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $fillable = [
-        'category_id', 'name', 'description', 'price'
+        'category_id',
+        'name',
+        'description',
+        'price',
+        'image',
+        'discount',
     ];
 
     public function category()
@@ -25,6 +30,16 @@ class Product extends Model
     {
         return $this->hasMany(OrderItem::class);
     }
+
+    public function finalPrice()
+    {
+        if ($this->discount > 0) {
+            return $this->price - ($this->price * $this->discount / 100);
+        }
+
+        return $this->price;
+    }
+
     /** @use HasFactory<\Database\Factories\ProductFactory> */
     use HasFactory;
 }

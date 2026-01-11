@@ -32,9 +32,13 @@
                 </button>
 
                 <!-- CART -->
-                <a class="btn btn-outline-secondary position-relative" href="{{ route('cart.index') }}">
-                    <i class="bi bi-cart"></i>
-                </a>
+                @auth
+                    @if(Auth::user()->role === 'user')
+                        <a class="btn btn-outline-secondary position-relative" href="{{ route('cart.index') }}">
+                            <i class="bi bi-cart"></i>
+                        </a>
+                    @endif
+                @endauth
 
                 <!-- AUTH -->
                 @auth
@@ -42,32 +46,37 @@
                         <a class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown">
                             {{ Auth::user()->name }}
                         </a>
+
                         <ul class="dropdown-menu dropdown-menu-end">
 
-                            <!-- Edit Profile -->
-                            <li>
-                                <a class="dropdown-item" href="{{ route('profile.edit') }}">
-                                    Edit Profile
-                                </a>
-                            </li>
+                            @if(Auth::user()->role === 'admin')
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('admin.dashboard') }}">
+                                        Admin Dashboard
+                                    </a>
+                                </li>
+                            @else
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('profile.edit') }}">
+                                        Edit Profile
+                                    </a>
+                                </li>
 
-                            <!-- View Orders -->
-                            <li>
-                                <a class="dropdown-item" href="{{ route('orders.index') }}">
-                                    My Orders
-                                </a>
-                            </li>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('orders.index') }}">
+                                        My Orders
+                                    </a>
+                                </li>
+                            @endif
 
                             <li><hr class="dropdown-divider"></li>
 
-                            <!-- Logout -->
                             <li>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button class="dropdown-item">Logout</button>
                                 </form>
                             </li>
-
                         </ul>
                     </div>
                 @else

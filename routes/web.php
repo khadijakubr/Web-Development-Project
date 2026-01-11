@@ -5,6 +5,11 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
+use App\Http\Controllers\Admin\OrderController as AdminOrderController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
+use App\Http\Controllers\Admin\DashboardController;
 
 
 Route::get('/', function () {
@@ -15,15 +20,9 @@ Route::get('/', function () {
 Route::prefix('products')->controller(ProductController::class)->group(function () {
     Route::get('/', 'index')->name('products');
     Route::get('/show/{id}', 'show')->name('products.show');
-    
-    // Admin routes (nanti bisa dikasih middleware admin)
-    Route::get('/create', 'create')->name('products.create');
-    Route::post('/store', 'store')->name('products.store');
-    Route::get('/edit/{id}', 'edit')->name('products.edit');
-    Route::post('/update/{id}', 'update')->name('products.update');
 });
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
@@ -48,6 +47,38 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/show/{id}', 'show')->name('orders.show');
     });
     
+});
+
+Route::middleware(['auth', 'verified', 'admin'])
+    ->prefix('admin')
+    ->name('admin.')
+    ->group(function () {
+
+        Route::get('/dashboard', [DashboardController::class, 'index'])
+            ->name('dashboard');
+
+        Route::resource('products', AdminProductController::class);
+
+        Route::resource('categories', AdminCategoryController::class)
+            ->only(['index', 'store', 'destroy']);
+
+        Route::resource('orders', AdminOrderController::class)
+            ->only(['index', 'show']);
+
+        // USERS
+        Route::get('users', [AdminUserController::class, 'index'])
+            ->name('users.index');
+
+        Route::put('users/{user}/role', [AdminUserController::class, 'updateRole'])
+            ->name('users.updateRole');
+
+        Route::delete('users/{user}', [AdminUserController::class, 'destroy'])
+            ->name('users.destroy');
+
+        // UPDATE ORDER STATUS
+        Route::put('orders/{order}/status',
+            [AdminOrderController::class, 'updateStatus']
+        )->name('orders.updateStatus');
 });
 
 // Auth Routes (dari Breeze)

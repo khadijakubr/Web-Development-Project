@@ -53,7 +53,23 @@
           </tr>
           <tr>
             <td>Harga</td>
-            <td><strong>Rp {{ number_format($product->price, 0, ',', '.') }}</strong></td>
+            @if ($product->discount > 0)
+              <p class="text-muted text-decoration-line-through mb-1">
+                Rp {{ number_format($product->price, 0, ',', '.') }}
+              </p>
+
+              <h3 class="text-success">
+                Rp {{ number_format($product->finalPrice(), 0, ',', '.') }}
+              </h3>
+
+              <span class="badge bg-danger">
+                Diskon {{ $product->discount }}%
+              </span>
+            @else
+              <h3 class="text-primary">
+                Rp {{ number_format($product->price, 0, ',', '.') }}
+              </h3>
+            @endif
           </tr>
           <tr>
             <td>Ditambahkan</td>

@@ -15,7 +15,7 @@
 
 @if ($isFirstPage && !$hasQuery)
     <!-- Hero Section -->
-    <div class="row align-items-center mb-5">
+    <div class="row align-items-center justify-content-evenly mb-5">
         <div class="col-md-6">
             <h1 class="display-5 fw-bold">
                 Find Your Next Favorite Book
@@ -24,7 +24,7 @@
                 Discover books that inspire, educate, and entertain.
             </p>
         </div>
-        <div class="col-md-6 text-center">
+        <div class="col-md-5 text-center">
             <img
                 src="/images/books-hero.png"
                 class="img-fluid"
@@ -40,13 +40,6 @@
   :categories="$categories" 
 />
 
-@auth
-<a href="{{ route('products.create') }}"
-  class="btn btn-primary position-fixed bottom-0 end-0 m-4 shadow">
-  + Add Product
-</a>
-@endauth
-
 <div class="row row-cols-1 row-cols-md-3 g-3">
   @foreach($products as $product)
     <div class="col">
@@ -54,7 +47,10 @@
           :id="$product->id"
           :name="$product->name" 
           :description="$product->description" 
-          :price="$product->price" />
+          :price="$product->price"
+          :finalPrice="$product->finalPrice()"
+          :discount="$product->discount"
+          :image="$product->image" />
     </div>
   @endforeach
 </div>
