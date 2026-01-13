@@ -5,14 +5,14 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
     public function index()
     {
-        return view('admin.categories.index', [
-            'categories' => Category::latest()->get()
-        ]);
+        $categories = Category::all();
+        return view('admin.categories.index', compact('categories'));
     }
 
     public function store(Request $request)
@@ -21,9 +21,16 @@ class CategoryController extends Controller
             'name' => 'required|string|unique:categories,name'
         ]);
 
-        Category::create(['name' => $request->name]);
+        // Create slug from name
+        $slug = Str::slug($request->name);  
+        
+        Category::create([
+            'name' => $request->name,
+            'slug' => $slug  
+        ]);
 
-        return back()->with('success', 'Kategori ditambahkan');
+        return redirect()->route('admin.categories.index')
+                        ->with('success', 'Kateggori berhasil dibuat!');
     }
 
     public function update(Request $request, Category $category)

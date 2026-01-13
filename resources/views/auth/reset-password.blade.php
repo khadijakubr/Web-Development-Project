@@ -1,31 +1,65 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
-<div class="auth-card text-center">
-    <h4 class="mb-2">Verify Your Email</h4>
+<div class="bg-white rounded-lg shadow-lg p-8 space-y-6">
+    <div>
+        <h1 class="text-2xl font-light text-gray-900">Reset Password</h1>
+        <p class="text-gray-600 text-sm mt-2">Create a new password for your account</p>
+    </div>
 
-    <p class="text-muted mb-4">
-        Thanks for signing up! Please verify your email address by clicking
-        the link we sent to your inbox.
-    </p>
+    <form method="POST" action="{{ route('password.store') }}" class="space-y-4">
+        @csrf
 
-    @if (session('status') === 'verification-link-sent')
-        <div class="alert alert-success small">
-            A new verification link has been sent to your email.
+        <input type="hidden" name="token" value="{{ $request->route('token') }}">
+
+        <div>
+            <label class="block text-sm font-medium text-gray-900 mb-1.5">Email Address</label>
+            <input
+                type="email"
+                name="email"
+                value="{{ old('email', $request->email) }}"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition"
+                placeholder="Enter your email"
+                required
+            >
+            @error('email')
+                <p class="text-red-600 text-xs mt-1.5">{{ $message }}</p>
+            @enderror
         </div>
-    @endif
 
-    <form method="POST" action="{{ route('verification.send') }}">
-        @csrf
-        <button class="btn btn-primary w-100 mb-3">
-            Resend Verification Email
-        </button>
-    </form>
+        <div>
+            <label class="block text-sm font-medium text-gray-900 mb-1.5">Password</label>
+            <input
+                type="password"
+                name="password"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition"
+                placeholder="Create a strong password"
+                required
+            >
+            @error('password')
+                <p class="text-red-600 text-xs mt-1.5">{{ $message }}</p>
+            @enderror
+        </div>
 
-    <form method="POST" action="{{ route('logout') }}">
-        @csrf
-        <button class="btn btn-link text-danger small">
-            Log out
+        <div>
+            <label class="block text-sm font-medium text-gray-900 mb-1.5">Confirm Password</label>
+            <input
+                type="password"
+                name="password_confirmation"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition"
+                placeholder="Confirm your password"
+                required
+            >
+            @error('password_confirmation')
+                <p class="text-red-600 text-xs mt-1.5">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <button 
+            type="submit" 
+            class="w-full bg-gray-900 text-white py-2.5 rounded-lg font-medium hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 transition"
+        >
+            Reset Password
         </button>
     </form>
 </div>

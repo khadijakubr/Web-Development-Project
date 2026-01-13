@@ -1,0 +1,1180 @@
+/* ============================================
+   Dark Mode Toggle Button Styling
+   ============================================ */
+
+.dark-mode-toggle-btn {
+    font-size: 1.2rem;
+    padding: 0.5rem 0.75rem !important;
+    color: #333;
+    transition: color 0.3s ease;
+    border: none;
+    background: none;
+}
+
+.dark-mode-toggle-btn:hover {
+    color: #666;
+    background-color: transparent;
+}
+
+.dark-mode-toggle-btn:focus {
+    box-shadow: none;
+}
+
+html.dark-mode .dark-mode-toggle-btn {
+    color: #ffd700;
+}
+
+html.dark-mode .dark-mode-toggle-btn:hover {
+    color: #ffed4e;
+    background-color: transparent;
+}
+
+/* ============================================
+   Dark Mode Styles - Global
+   ============================================ */
+
+html.dark-mode {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --border-color: #444;
+    --card-bg: #252525;
+}
+
+html.dark-mode * {
+    color-scheme: dark;
+}
+
+html.dark-mode body {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ============================================
+   Navbar & Navigation
+   ============================================ */
+
+html.dark-mode .navbar {
+    background-color: var(--bg-secondary) !important;
+    border-bottom: 1px solid var(--border-color);
+}
+
+html.dark-mode .navbar-brand,
+html.dark-mode .navbar-brand:hover {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .nav-link {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .nav-link:hover {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .dropdown-menu {
+    background-color: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .dropdown-item {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .dropdown-item:hover,
+html.dark-mode .dropdown-item:focus {
+    background-color: #3a3a3a !important;
+    color: var(--text-primary) !important;
+}
+
+/* ============================================
+   Form Elements
+   ============================================ */
+
+html.dark-mode .form-control,
+html.dark-mode input[type="text"],
+html.dark-mode input[type="email"],
+html.dark-mode input[type="password"],
+html.dark-mode input[type="search"],
+html.dark-mode input[type="tel"],
+html.dark-mode input[type="number"],
+html.dark-mode textarea,
+html.dark-mode select {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .form-control:focus,
+html.dark-mode input:focus,
+html.dark-mode textarea:focus,
+html.dark-mode select:focus {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border-color: #666 !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.25) !important;
+}
+
+html.dark-mode .form-label,
+html.dark-mode label {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode input::placeholder,
+html.dark-mode textarea::placeholder {
+    color: var(--text-secondary) !important;
+    opacity: 0.7;
+}
+
+/* ============================================
+   Buttons - All Types
+   ============================================ */
+
+html.dark-mode .btn {
+    color: var(--text-primary) !important;
+}
+
+/* Primary Buttons */
+html.dark-mode .btn-primary {
+    background-color: #1a1a1a !important;
+    color: var(--text-primary) !important;
+    border-color: var(--text-primary) !important;
+}
+
+html.dark-mode .btn-primary:hover {
+    background-color: var(--text-primary) !important;
+    color: #1a1a1a !important;
+    border-color: var(--text-primary) !important;
+}
+
+/* Secondary Buttons */
+html.dark-mode .btn-secondary {
+    background-color: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .btn-secondary:hover {
+    background-color: #404040 !important;
+    color: var(--text-primary) !important;
+    border-color: var(--text-primary) !important;
+}
+
+/* Outline Buttons */
+html.dark-mode .btn-outline-secondary {
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .btn-outline-secondary:hover {
+    background-color: #3a3a3a !important;
+    border-color: var(--text-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .btn-outline-dark {
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .btn-outline-dark:hover {
+    background-color: var(--text-primary) !important;
+    color: var(--bg-primary) !important;
+    border-color: var(--text-primary) !important;
+}
+
+/* Link Buttons */
+html.dark-mode .btn-link {
+    color: #66b3ff !important;
+}
+
+html.dark-mode .btn-link:hover {
+    color: #99ccff !important;
+}
+
+/* Custom Buttons */
+html.dark-mode .btn-add-cart,
+html.dark-mode .btn-view-details,
+html.dark-mode .btn-remove,
+html.dark-mode .view-btn,
+html.dark-mode .action-btn {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .btn-add-cart:hover,
+html.dark-mode .btn-view-details:hover,
+html.dark-mode .view-btn:hover,
+html.dark-mode .action-btn:hover {
+    background-color: #404040 !important;
+    color: var(--text-primary) !important;
+    border-color: var(--text-primary) !important;
+}
+
+html.dark-mode .continue-shopping-btn {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .continue-shopping-btn:hover {
+    background-color: #404040 !important;
+    color: var(--text-primary) !important;
+    border-color: var(--text-primary) !important;
+}
+
+/* ============================================
+   Cards & Containers
+   ============================================ */
+
+html.dark-mode .card {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .card-header {
+    background-color: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .card-body {
+    background-color: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .product-card {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .product-card * {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .product-image-container {
+    background-color: #1a1a1a !important;
+}
+
+html.dark-mode .product-title {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .product-price {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .product-title-link {
+    color: #66b3ff !important;
+}
+
+html.dark-mode .product-title-link:hover {
+    color: #99ccff !important;
+}
+
+/* Product Detail Page */
+html.dark-mode .product-detail-container {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .product-image-section {
+    background-color: #1a1a1a !important;
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .product-image-wrapper {
+    background-color: #1a1a1a !important;
+}
+
+html.dark-mode .product-image-placeholder {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%) !important;
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .product-back-btn {
+    color: #66b3ff !important;
+}
+
+html.dark-mode .product-back-btn:hover {
+    color: #99ccff !important;
+}
+
+html.dark-mode .product-category {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .product-name {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .product-description-label,
+html.dark-mode .product-description {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .product-price-section {
+    background-color: #1a1a1a !important;
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .product-price-original {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .product-price-current {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .product-discount-badge {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .product-info-section {
+    background-color: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .product-info-title {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .product-info-table {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .product-info-table td {
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .quantity-control-product {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .product-login-cta {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-secondary) !important;
+    padding: 1.5rem !important;
+    border-radius: 8px !important;
+}
+
+/* ============================================
+   Text & Typography
+   ============================================ */
+
+html.dark-mode h1,
+html.dark-mode h2,
+html.dark-mode h3,
+html.dark-mode h4,
+html.dark-mode h5,
+html.dark-mode h6,
+html.dark-mode p,
+html.dark-mode span,
+html.dark-mode div {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .text-muted {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode a {
+    color: #66b3ff !important;
+}
+
+html.dark-mode a:hover {
+    color: #99ccff !important;
+}
+
+/* ============================================
+   Alerts & Messages
+   ============================================ */
+
+html.dark-mode .alert {
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .alert-success {
+    background-color: #1a3a1a !important;
+    color: #90ee90 !important;
+    border-color: #2d5a2d !important;
+}
+
+html.dark-mode .alert-danger {
+    background-color: #3a1a1a !important;
+    color: #ff9999 !important;
+    border-color: #5a2d2d !important;
+}
+
+html.dark-mode .alert-warning {
+    background-color: #3a3a1a !important;
+    color: #ffed4e !important;
+    border-color: #5a5a2d !important;
+}
+
+html.dark-mode .alert-info {
+    background-color: #1a3a3a !important;
+    color: #99ddff !important;
+    border-color: #2d5a5a !important;
+}
+
+/* ============================================
+   Cart & Checkout
+   ============================================ */
+
+html.dark-mode .checkout-summary-card,
+html.dark-mode .cart-summary-card,
+html.dark-mode .cart-item-card,
+html.dark-mode .checkout-section {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .cart-item-header,
+html.dark-mode .checkout-section {
+    background-color: var(--bg-secondary) !important;
+}
+
+html.dark-mode .cart-empty,
+html.dark-mode .orders-empty {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .price-value,
+html.dark-mode .original-price,
+html.dark-mode .item-name,
+html.dark-mode .item-qty,
+html.dark-mode .item-price,
+html.dark-mode .summary-value,
+html.dark-mode .total-value {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .price-label,
+html.dark-mode .quantity-label,
+html.dark-mode .subtotal-label,
+html.dark-mode .summary-label,
+html.dark-mode .total-label {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .quantity-control-cart {
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .quantity-input-cart {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .qty-btn-cart {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .qty-btn-cart:hover {
+    background-color: #3a3a3a !important;
+    color: var(--text-primary) !important;
+}
+
+/* ============================================
+   Order & Product Sections
+   ============================================ */
+
+html.dark-mode .order-card,
+html.dark-mode .order-card-header {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .order-card-header {
+    background-color: var(--bg-secondary) !important;
+}
+
+html.dark-mode .order-info,
+html.dark-mode .order-number,
+html.dark-mode .order-date,
+html.dark-mode .order-items,
+html.dark-mode .order-item,
+html.dark-mode .item-details,
+html.dark-mode .order-summary {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .products-filter {
+    background-color: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+/* ============================================
+   Mobile Menu Styling (Dark Mode)
+   ============================================ */
+
+html.dark-mode .navbar-collapse {
+    background-color: var(--bg-secondary) !important;
+}
+
+/* Mobile Menu Border - Only on smaller screens */
+@media (max-width: 991.98px) {
+    html.dark-mode .navbar-collapse {
+        border-top: 1px solid var(--border-color) !important;
+        border-radius: 0 0 8px 8px;
+        margin-top: 0.5rem;
+    }
+}
+
+html.dark-mode .navbar-collapse .btn-outline-secondary {
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .navbar-collapse .btn-outline-secondary:hover {
+    background-color: #3a3a3a !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .navbar-collapse .btn-outline-danger {
+    color: #ff9999 !important;
+    border-color: #5a2d2d !important;
+}
+
+html.dark-mode .navbar-collapse .btn-outline-danger:hover {
+    background-color: #3a1a1a !important;
+    color: #ff9999 !important;
+}
+
+html.dark-mode .navbar-collapse .form-control {
+    background-color: #1a1a1a !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .orders-container {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .orders-header {
+    background-color: var(--bg-primary) !important;
+}
+
+html.dark-mode .orders-title {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .orders-subtitle {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .orders-empty {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .empty-text {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .empty-subtext {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .orders-list {
+    background-color: var(--bg-primary) !important;
+}
+
+html.dark-mode .order-card {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .order-card-header {
+    background-color: var(--bg-secondary) !important;
+    border-bottom-color: var(--border-color) !important;
+}
+
+html.dark-mode .order-info,
+html.dark-mode .order-number,
+html.dark-mode .order-date {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .order-card-body {
+    background-color: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .order-items,
+html.dark-mode .order-items-title,
+html.dark-mode .order-item {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .item-name {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .item-qty {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .order-summary {
+    color: var(--text-primary) !important;
+    border-top-color: var(--border-color) !important;
+}
+
+html.dark-mode .summary-label {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .summary-value {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .order-card-footer {
+    background-color: var(--bg-secondary) !important;
+    border-top-color: var(--border-color) !important;
+}
+
+/* Status Badges - Make readable with black text */
+html.dark-mode .status-badge {
+    font-weight: 600;
+    color: #000 !important;
+}
+
+html.dark-mode .status-pending {
+    background-color: #ffd700 !important;
+    color: #000 !important;
+}
+
+html.dark-mode .status-processing {
+    background-color: #66b3ff !important;
+    color: #000 !important;
+}
+
+html.dark-mode .status-paid {
+    background-color: #90ee90 !important;
+    color: #000 !important;
+}
+
+html.dark-mode .status-completed {
+    background-color: #90ee90 !important;
+    color: #000 !important;
+}
+
+html.dark-mode .status-cancelled {
+    background-color: #ff9999 !important;
+    color: #000 !important;
+}
+
+/* Order Detail Page */
+html.dark-mode .order-detail-container {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .order-detail-header {
+    background-color: var(--bg-primary) !important;
+    border-bottom-color: var(--border-color) !important;
+}
+
+html.dark-mode .page-title {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .page-subtitle {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .order-detail-grid {
+    background-color: var(--bg-primary) !important;
+}
+
+html.dark-mode .order-card {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .order-card-header {
+    background-color: var(--bg-secondary) !important;
+    border-bottom-color: var(--border-color) !important;
+}
+
+html.dark-mode .card-title {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .card-subtitle {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .order-status-badge {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .order-items-table {
+    background-color: var(--bg-secondary) !important;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+html.dark-mode .order-table {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    margin: 0 !important;
+}
+
+html.dark-mode .order-table thead {
+    background-color: #1a1a1a !important;
+    border-bottom-color: var(--border-color) !important;
+}
+
+html.dark-mode .order-table th {
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+    background-color: #1a1a1a !important;
+}
+
+html.dark-mode .order-table td {
+    background-color: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .order-table tbody tr:hover {
+    background-color: #333333 !important;
+}
+
+html.dark-mode .item-name {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .item-category {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .item-price,
+html.dark-mode .item-quantity,
+html.dark-mode .item-subtotal {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .order-summary {
+    color: var(--text-primary) !important;
+    border-top-color: var(--border-color) !important;
+}
+
+html.dark-mode .order-info-card {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .order-info-card .card-header {
+    background-color: var(--bg-secondary) !important;
+    border-bottom-color: var(--border-color) !important;
+}
+
+html.dark-mode .order-info-value {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .info-label {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .info-value {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .payment-method {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .payment-status-alert {
+    background-color: var(--bg-primary) !important;
+}
+
+/* Payment Status Alerts - Better visibility in dark mode */
+html.dark-mode .payment-status-alert .alert {
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .alert-warning {
+    background-color: #3a3a1a !important;
+    color: #ffed4e !important;
+    border-color: #5a5a2d !important;
+}
+
+html.dark-mode .alert-success {
+    background-color: #1a3a1a !important;
+    color: #90ee90 !important;
+    border-color: #2d5a2d !important;
+}
+
+html.dark-mode .alert-info {
+    background-color: #1a3a3a !important;
+    color: #99ddff !important;
+    border-color: #2d5a5a !important;
+}
+
+html.dark-mode .alert-danger {
+    background-color: #3a1a1a !important;
+    color: #ff9999 !important;
+    border-color: #5a2d2d !important;
+}
+
+html.dark-mode .order-timeline {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .timeline-item {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .timeline-marker {
+    background-color: #ffd700 !important;
+    border-color: var(--bg-secondary) !important;
+}
+
+html.dark-mode .timeline-date {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .timeline-text {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .profile-container {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .profile-header {
+    border-bottom-color: var(--border-color) !important;
+}
+
+html.dark-mode .profile-title {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .profile-subtitle {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .profile-content {
+    background-color: var(--bg-primary) !important;
+}
+
+html.dark-mode .profile-section {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .profile-section-danger {
+    background-color: var(--card-bg) !important;
+    border-color: #5a2d2d !important;
+}
+
+html.dark-mode .section-header {
+    background-color: var(--bg-secondary) !important;
+    border-bottom-color: var(--border-color) !important;
+}
+
+html.dark-mode .section-title {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .section-description {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .section-body {
+    background-color: var(--card-bg) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .dashboard-container {
+    background-color: var(--bg-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .dashboard-header {
+    border-bottom-color: var(--border-color) !important;
+}
+
+html.dark-mode .dashboard-title {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .dashboard-subtitle {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .stat-card {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .stat-label {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .stat-value {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .section-title {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .action-btn {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .action-btn:hover {
+    background-color: #1a1a1a !important;
+    color: var(--text-primary) !important;
+    border-color: var(--text-primary) !important;
+}
+
+html.dark-mode .action-icon {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .action-text {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .recent-orders {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .empty-state {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .empty-text {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .empty-subtext {
+    color: var(--text-secondary) !important;
+}
+
+/* ============================================
+   Tables
+   ============================================ */
+
+html.dark-mode .orders-table {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .orders-table thead {
+    background-color: var(--bg-secondary) !important;
+    border-bottom-color: var(--border-color) !important;
+}
+
+html.dark-mode .orders-table td,
+html.dark-mode .orders-table th {
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .orders-table tbody tr:hover {
+    background-color: var(--bg-secondary) !important;
+}
+
+html.dark-mode .order-id,
+html.dark-mode .order-date,
+html.dark-mode .order-total {
+    color: var(--text-primary) !important;
+}
+
+/* ============================================
+   Modals
+   ============================================ */
+
+html.dark-mode .modal-content {
+    background-color: var(--card-bg) !important;
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .modal-header {
+    border-bottom-color: var(--border-color) !important;
+    background-color: var(--bg-secondary) !important;
+}
+
+html.dark-mode .modal-title {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .modal-body {
+    color: var(--text-primary) !important;
+    background-color: var(--card-bg) !important;
+}
+
+html.dark-mode .modal-footer {
+    border-top-color: var(--border-color) !important;
+    background-color: var(--bg-secondary) !important;
+}
+
+html.dark-mode .btn-close {
+    filter: invert(1) !important;
+}
+
+/* ============================================
+   Pagination
+   ============================================ */
+
+html.dark-mode .pagination .page-link {
+    background-color: var(--bg-secondary) !important;
+    border-color: var(--border-color) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .pagination .page-link:hover {
+    background-color: #3a3a3a !important;
+    border-color: var(--text-primary) !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .pagination .page-item.active .page-link {
+    background-color: #ffd700 !important;
+    border-color: #ffd700 !important;
+    color: #1a1a1a !important;
+}
+
+/* ============================================
+   Miscellaneous
+   ============================================ */
+
+html.dark-mode .border-bottom,
+html.dark-mode .border-top {
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .bg-light {
+    background-color: var(--bg-secondary) !important;
+}
+
+html.dark-mode .off-white {
+    background-color: var(--bg-secondary) !important;
+}
+
+html.dark-mode hr {
+    border-color: var(--border-color) !important;
+}
+
+html.dark-mode .shadow-sm {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+}
+
+html.dark-mode .summary-divider {
+    background-color: var(--border-color) !important;
+}
+
+/* ============================================
+   Promo Code Component - Dark Mode
+   ============================================ */
+
+html.dark-mode .promo-input-section {
+    background-color: #1a1a1a;
+}
+
+html.dark-mode .promo-label {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .promo-input {
+    background-color: #2d2d2d !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+html.dark-mode .promo-input::placeholder {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .promo-input:focus {
+    background-color: #2d2d2d !important;
+    color: var(--text-primary) !important;
+    border-color: #555 !important;
+    box-shadow: 0 0 0 0.2rem rgba(255, 215, 0, 0.15) !important;
+}
+
+html.dark-mode .btn-promo-apply {
+    background-color: #4a4a4a !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+}
+
+html.dark-mode .btn-promo-apply:hover {
+    background-color: #5a5a5a !important;
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .btn-promo-apply:active {
+    background-color: #3a3a3a !important;
+}
+
+html.dark-mode .promo-message {
+    color: var(--text-primary) !important;
+}
+
+html.dark-mode .discount-section {
+    background-color: transparent;
+}
+
+html.dark-mode .discount-label {
+    color: var(--text-secondary) !important;
+}
+
+html.dark-mode .discount-value {
+    color: #4ade80 !important;
+}
+
+/* Promo Alert Messages - Dark Mode */
+html.dark-mode .promo-alert-success {
+    background-color: #064e3b !important;
+    color: #10b981 !important;
+    border-color: #059669 !important;
+}
+
+html.dark-mode .promo-alert-error {
+    background-color: #7f1d1d !important;
+    color: #f87171 !important;
+    border-color: #dc2626 !important;
+}
+
+html.dark-mode .promo-input-error {
+    border-color: #dc2626 !important;
+    background-color: #2d1e1e !important;
+}
+
+html.dark-mode .promo-input-error:focus {
+    border-color: #ef4444 !important;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.2) !important;
+}

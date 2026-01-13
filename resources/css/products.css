@@ -1,0 +1,434 @@
+/* ============================================
+   BOOK STORE PRODUCT GRID - RESPONSIVE DESIGN
+   ============================================ */
+
+/* Hero Section */
+.hero-section {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+    color: white;
+    padding: 4rem 2rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    border-radius: 8px;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 300;
+    letter-spacing: 1px;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    color: #d0d0d0;
+    font-weight: 300;
+}
+
+/* Products Container */
+.products-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* Filter Section */
+.products-filter {
+    margin-bottom: 2.5rem;
+    padding: 1.5rem;
+    background: #f8f8f8;
+    border-radius: 6px;
+    border: 1px solid #ececec;
+}
+
+.filter-form {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.filter-form input,
+.filter-form select {
+    padding: 0.6rem 0.9rem;
+    border: 1px solid #d0d0d0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    background: white;
+    color: #2d2d2d;
+    font-family: inherit;
+}
+
+.filter-form input:focus,
+.filter-form select:focus {
+    outline: none;
+    border-color: #1a1a1a;
+    box-shadow: 0 0 0 2px rgba(26, 26, 26, 0.1);
+}
+
+/* ============================================
+   PRODUCT GRID - Responsive Layout
+   4 cols (desktop) -> 3 cols (tablet) -> 2 cols (mobile)
+   ============================================ */
+
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    margin-bottom: 3rem;
+}
+
+/* Responsive - Tablet: 3 columns */
+@media (max-width: 1199px) {
+    .product-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+/* Responsive - Mobile: 2 columns */
+@media (max-width: 767px) {
+    .product-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+}
+
+/* Responsive - Small Mobile: 1 column */
+@media (max-width: 479px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 0 0.5rem;
+    }
+}
+
+/* ============================================
+   PRODUCT CARD - Clean, Minimal Design
+   ============================================ */
+
+.product-card {
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
+    border-radius: 6px;  /* ← Keep this */
+    transition: all 0.3s ease;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    overflow: hidden;  /* ← ADD THIS - hides overflow */
+}
+
+.product-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    border-color: #d0d0d0;
+}
+
+/* ============================================
+   PRODUCT IMAGE - Responsive Container
+   ============================================ */
+
+.product-image-container {
+    position: relative;
+    width: 100%;
+    background: #f8f8f8;
+    overflow: hidden; 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+    aspect-ratio: 3 / 4;
+    flex-shrink: 0;  
+}
+
+.product-image {
+    max-width: 90%;
+    max-height: 250px;  
+    object-fit: contain;  
+    object-position: center;
+    transition: transform 0.3s ease;
+}
+
+.product-card:hover .product-image {
+    transform: scale(1.05);
+}
+
+/* Discount Badge - Top Right Corner */
+.discount-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #ff4444;
+    color: white;
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    z-index: 10;
+}
+
+/* ============================================
+   PRODUCT INFO - Title, Rating, Price
+   ============================================ */
+
+.product-info {
+    padding: 1.5rem 1rem;  /* ← Increase from 1.25rem */
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;  /* ← Center horizontally */
+    justify-content: center;  /* ← Add this: center vertically */
+    text-align: center;
+    gap: 0.5rem;  /* ← Add spacing between elements */
+}
+
+/* Product Title */
+.product-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin: 0 0 0.6rem 0;
+    text-align: center;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Rating Stars */
+.product-rating {
+    display: flex;
+    justify-content: center;
+    gap: 0.2rem;
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+}
+
+.product-image-link,
+.product-title-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.product-title-link:hover {
+    color: #2d2d2d;
+}
+
+.star {
+    color: #ffc107;
+    display: inline-block;
+}
+
+.star.empty {
+    color: #e5e5e5;
+}
+
+/* Price Section - with optional discount */
+.price-section {
+    text-align: center;
+    width: 100%;
+}
+
+.original-price {
+    font-size: 0.8rem;
+    color: #999;
+    text-decoration: line-through;
+    margin: 0 0 0.2rem 0;
+}
+
+/* Product Price */
+.product-price {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #1a1a1a;
+    text-align: center;
+    margin: 0;
+}
+
+/* ============================================
+   PAGINATION - Minimalist
+   ============================================ */
+
+.pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 3rem 1rem;
+    margin-bottom: 2rem;
+}
+
+.pagination-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 40px;
+    height: 40px;
+    padding: 0 0.75rem;
+    margin: 0 0.25rem;
+    border: 1px solid #d0d0d0;
+    background: #ffffff;
+    color: #2d2d2d;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.pagination-btn:hover:not(:disabled) {
+    background: #f5f5f5;
+    border-color: #2d2d2d;
+}
+
+.pagination-btn.active,
+.pagination-btn[aria-current="page"] {
+    background: #2d2d2d;
+    color: #ffffff;
+    border-color: #2d2d2d;
+    cursor: default;
+}
+
+.pagination-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ============================================
+   EMPTY STATE
+   ============================================ */
+
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: #f8f8f8;
+    border-radius: 6px;
+    border: 1px solid #ececec;
+    margin: 3rem 0;
+}
+
+.empty-state h3 {
+    color: #1a1a1a;
+    font-size: 1.5rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+}
+
+.empty-state p {
+    color: #4a4a4a;
+    font-size: 1rem;
+    margin: 0;
+}
+
+/* Product Card Footer - Buttons */
+.product-card-footer {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+    padding-top: 1rem;
+    border-top: 1px solid #f0f0f0;
+}
+
+.btn-add-cart {
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    min-height: 40px;
+    background: #1a1a1a;
+    color: #ffffff;
+    border: 1px solid #1a1a1a;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.btn-add-cart:hover {
+    background: #2d2d2d;
+    border-color: #2d2d2d;
+    transform: scale(1.05);
+}
+
+.btn-view-details {
+    flex: 1;
+    padding: 0.6rem 1rem;
+    background: #f8f8f8;
+    color: #1a1a1a;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.btn-view-details:hover {
+    background: #1a1a1a;
+    color: #ffffff;
+    border-color: #1a1a1a;
+}
+
+/* ============================================
+   RESPONSIVE TYPOGRAPHY
+   ============================================ */
+
+@media (max-width: 767px) {
+    .hero-content h1 {
+        font-size: 1.75rem;
+    }
+
+    .hero-content p {
+        font-size: 1rem;
+    }
+
+    .product-title {
+        font-size: 0.85rem;
+    }
+
+    .product-price {
+        font-size: 1rem;
+    }
+
+    .product-image-container {
+        min-height: 240px; 
+        aspect-ratio: 3 / 4;
+    }
+
+    .product-image {
+        max-height: 220px;  
+    }
+
+    .product-info {
+        padding: 1rem 0.9rem;
+    }
+}
+
+@media (max-width: 479px) {
+    .product-image-container {
+        min-height: 200px;  /* ← Increase from 150px */
+        aspect-ratio: 3 / 4;
+    }
+
+    .product-image {
+        max-height: 180px;  
+    }
+
+    .product-title {
+        font-size: 0.8rem;
+    }
+
+    .product-price {
+        font-size: 0.95rem;
+    }
+
+    .product-info {
+        padding: 0.9rem 0.8rem;
+    }
+}

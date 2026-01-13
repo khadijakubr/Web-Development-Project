@@ -1,85 +1,94 @@
 @extends('admin.layouts.app')
 
 @section('content')
-<div class="row mb-4">
-    <div class="col">
-        <h2 class="mb-0"><i class="bi bi-tag"></i> Categories Management</h2>
-    </div>
-</div>
-
-@if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
-        <i class="bi bi-check-circle"></i> {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-@endif
-
-<div class="row">
-    <div class="col-lg-6">
-        <!-- Add Category Form -->
-        <div class="card mb-4">
-            <div class="card-header bg-light">
-                <h5 class="mb-0"><i class="bi bi-plus-circle"></i> Add New Category</h5>
-            </div>
-            <div class="card-body">
-                <form method="POST" action="{{ route('admin.categories.store') }}" novalidate>
-                    @csrf
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Category Name *</label>
-                        <input 
-                            type="text"
-                            id="name"
-                            name="name" 
-                            class="form-control @error('name') is-invalid @enderror"
-                            placeholder="Enter category name"
-                            value="{{ old('name') }}"
-                            required
-                        >
-                        @error('name')
-                            <div class="invalid-feedback d-block">{{ $message }}</div>
-                        @enderror
-                    </div>
-                    <button type="submit" class="btn btn-success w-100">
-                        <i class="bi bi-check-circle"></i> Add Category
-                    </button>
-                </form>
-            </div>
+<div class="admin-categories-container">
+    <!-- Page Header -->
+    <div class="admin-page-header">
+        <div>
+            <h1 class="admin-page-title">Categories Management</h1>
+            <p class="admin-page-subtitle">Manage product categories</p>
         </div>
     </div>
 
-    <div class="col-lg-6">
-        <!-- Categories List -->
-        <div class="card">
-            <div class="card-header bg-light">
-                <h5 class="mb-0"><i class="bi bi-list-ul"></i> Categories List</h5>
-            </div>
-            <div class="card-body">
-                @if($categories->count())
-                    <div class="list-group">
-                        @foreach($categories as $category)
-                        <div class="list-group-item d-flex justify-content-between align-items-center">
-                            <div>
-                                <h6 class="mb-0">{{ $category->name }}</h6>
-                            </div>
-                            <form 
-                                method="POST" 
-                                action="{{ route('admin.categories.destroy', $category->id) }}"
-                                onsubmit="return confirm('Are you sure you want to delete this category?')"
+    <!-- Success Message -->
+    @if(session('success'))
+        <div class="admin-alert admin-alert-success">
+            <i class="bi bi-check-circle"></i>
+            <span>{{ session('success') }}</span>
+            <button type="button" class="admin-alert-close" onclick="this.parentElement.style.display='none';">×</button>
+        </div>
+    @endif
+
+    <div class="admin-categories-layout">
+        <!-- Add Category Form Section -->
+        <div class="admin-form-section">
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <h2 class="admin-card-title">Add New Category</h2>
+                </div>
+                <div class="admin-card-body">
+                    <form method="POST" action="{{ route('admin.categories.store') }}" novalidate>
+                        @csrf
+                        <div class="form-group">
+                            <label for="name" class="form-label">Category Name <span class="required">*</span></label>
+                            <input 
+                                type="text"
+                                id="name"
+                                name="name" 
+                                class="form-control @error('name') is-invalid @enderror"
+                                placeholder="Enter category name"
+                                value="{{ old('name') }}"
+                                required
                             >
-                                @csrf @method('DELETE')
-                                <button type="submit" class="btn btn-sm btn-danger">
-                                    <i class="bi bi-trash"></i>
-                                </button>
-                            </form>
+                            @error('name')
+                                <div class="invalid-feedback d-block">{{ $message }}</div>
+                            @enderror
                         </div>
-                        @endforeach
-                    </div>
-                @else
-                    <div class="text-center py-4">
-                        <i class="bi bi-inbox text-muted" style="font-size: 2rem;"></i>
-                        <p class="text-muted mt-2">No categories yet</p>
-                    </div>
-                @endif
+                        <button type="submit" class="btn-admin btn-admin-primary w-100">
+                            <i class="bi bi-plus-lg"></i> Add Category
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Categories List Section -->
+        <div class="admin-list-section">
+            <div class="admin-card">
+                <div class="admin-card-header">
+                    <h2 class="admin-card-title">Categories List</h2>
+                    <span class="category-count">{{ $categories->count() }} item(s)</span>
+                </div>
+                <div class="admin-card-body">
+                    @if($categories->count())
+                        <div class="categories-list">
+                            @foreach($categories as $category)
+                            <div class="category-item">
+                                <div class="category-info">
+                                    <h3 class="category-name">{{ $category->name }}</h3>
+                                </div>
+                                <form 
+                                    method="POST" 
+                                    action="{{ route('admin.categories.destroy', $category->id) }}"
+                                    onsubmit="return confirm('Are you sure you want to delete this category?')"
+                                    class="category-action"
+                                >
+                                    @csrf @method('DELETE')
+                                    <button type="submit" class="btn-admin btn-admin-danger btn-sm">
+                                        <i class="bi bi-trash"></i> Delete
+                                    </button>
+                                </form>
+                            </div>
+                            @endforeach
+                        </div>
+                    @else
+                        <div class="empty-state">
+                            <i class="bi bi-inbox"></i>
+                            <p>No categories yet</p>
+                            <small>Create your first category to organize products</small>
+                        </div>
+                    @endif
+                </div>
             </div>
         </div>
     </div>

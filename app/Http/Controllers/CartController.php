@@ -26,33 +26,32 @@ class CartController extends Controller
     // POST /cart/add - Tambah produk ke keranjang
     public function add(Request $request)
     {
-        // Validasi input
-        $request->validate([
+        $validated = $request->validate([
             'product_id' => 'required|exists:products,id',
-            'quantity' => 'required|integer|min:1'
+            'quantity' => 'required|integer|min:1',
         ]);
-        
-        $product = Product::findOrFail($request->product_id);
-        
-        // Cek apakah produk sudah ada di cart user ini
-        $cartItem = CartItem::where('user_id', Auth::id())
-                            ->where('product_id', $product->id)
-                            ->first();
-        
+
+        $product = Product::find($validated['product_id']);
+        $discount = $product->discount ?? 0;  // ← Get discount from product
+
+        $cartItem = CartItem::where('user_id', auth()->id())
+            ->where('product_id', $validated['product_id'])
+            ->first();
+
         if ($cartItem) {
-            // Kalau sudah ada, tambahkan quantity
-            $cartItem->quantity += $request->quantity;
+            $cartItem->quantity += $validated['quantity'];
+            $cartItem->discount = $discount;  // ← Update discount
             $cartItem->save();
         } else {
-            // Kalau belum ada, buat cart item baru
             CartItem::create([
-                'user_id' => Auth::id(),
-                'product_id' => $product->id,
-                'quantity' => $request->quantity
+                'user_id' => auth()->id(),
+                'product_id' => $validated['product_id'],
+                'quantity' => $validated['quantity'],
+                'discount' => $discount,  // ← Store discount
             ]);
         }
-        
-        return redirect()->back()->with('success', 'Produk berhasil ditambahkan ke keranjang!');
+
+        return redirect()->back()->with('success', 'Product added to cart!');
     }
     
     // POST /cart/update/{id} - Update quantity item di cart
@@ -70,7 +69,7 @@ class CartController extends Controller
         $cartItem->quantity = $request->quantity;
         $cartItem->save();
         
-        return redirect()->back()->with('success', 'Quantity berhasil diupdate!');
+        return redirect()->back();
     }
     
     // DELETE /cart/remove/{id} - Hapus item dari cart
@@ -83,6 +82,6 @@ class CartController extends Controller
         
         $cartItem->delete();
         
-        return redirect()->back()->with('success', 'Produk berhasil dihapus dari keranjang!');
+        return redirect()->back();
     }
 }

@@ -3,30 +3,50 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CartItem extends Model
 {
-    protected $fillable = [
+ protected $fillable = [
         'user_id',
         'product_id',
-        'quantity'
+        'quantity',
+        'discount',
+        'promo_id', 
     ];
 
-    // Relasi: CartItem belongs to User (1 cart item punya 1 user)
-    public function user()
+    protected $casts = [
+        'discount' => 'decimal:2',
+    ];
+
+    /**
+     * Get the user that owns the cart item
+     */
+    public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
     }
 
-    // Relasi: CartItem belongs to Product (1 cart item punya 1 produk)
-    public function product()
+    /**
+     * Get the product in the cart item
+     */
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
 
-    // Helper method: Hitung subtotal untuk item ini
+    /**
+     * Get the promo applied to this cart item
+     */
+    public function promo(): BelongsTo
+    {
+        return $this->belongsTo(Promo::class)->withDefault();
+    }
+
     public function getSubtotalAttribute()
     {
-        return $this->quantity * $this->product->price;
+        $price = $this->product->price;
+        $discountedPrice = $price - ($price * $this->discount / 100);
+        return $discountedPrice * $this->quantity;
     }
 }

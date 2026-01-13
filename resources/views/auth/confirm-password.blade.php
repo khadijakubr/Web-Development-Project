@@ -1,28 +1,34 @@
-@extends('layouts.app')
+@extends('layouts.auth')
 
 @section('content')
-<div class="auth-card">
-    <h4 class="mb-1">Confirm Password</h4>
-    <p class="text-muted mb-4">
-        This is a secure area. Please confirm your password.
-    </p>
+<div class="bg-white rounded-lg shadow-lg p-8 space-y-6">
+    <div>
+        <h1 class="text-2xl font-light text-gray-900">Confirm Password</h1>
+        <p class="text-gray-600 text-sm mt-2">Please confirm your password before continuing</p>
+    </div>
 
-    <form method="POST" action="{{ route('password.confirm') }}">
+    <form method="POST" action="{{ route('password.confirm') }}" class="space-y-4">
         @csrf
 
-        <div class="mb-4">
-            <label class="form-label">Password</label>
+        <div>
+            <label class="block text-sm font-medium text-gray-900 mb-1.5">Password</label>
             <input
                 type="password"
                 name="password"
-                class="form-control"
+                class="w-full px-4 py-2.5 border border-gray-300 rounded-lg text-gray-900 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:border-transparent transition"
+                placeholder="Enter your password"
                 required
-                autocomplete="current-password"
             >
+            @error('password')
+                <p class="text-red-600 text-xs mt-1.5">{{ $message }}</p>
+            @enderror
         </div>
 
-        <button class="btn btn-primary w-100">
-            Confirm
+        <button 
+            type="submit" 
+            class="w-full bg-gray-900 text-white py-2.5 rounded-lg font-medium hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 transition"
+        >
+            Confirm Password
         </button>
     </form>
 </div>

@@ -18,10 +18,10 @@
     <div class="row align-items-center justify-content-evenly mb-5">
         <div class="col-md-6">
             <h1 class="display-5 fw-bold">
-                Find Your Next Favorite Book
+                Discover Your Next Favorite Book
             </h1>
             <p class="text-muted">
-                Discover books that inspire, educate, and entertain.
+                Find books that inspire, educate, and entertain.
             </p>
         </div>
         <div class="col-md-5 text-center">
@@ -40,7 +40,7 @@
   :categories="$categories" 
 />
 
-<div class="row row-cols-1 row-cols-md-3 g-3">
+<div class="product-grid">
   @foreach($products as $product)
     <div class="col">
       <x-product-card 
@@ -48,9 +48,8 @@
           :name="$product->name" 
           :description="$product->description" 
           :price="$product->price"
-          :finalPrice="$product->finalPrice()"
-          :discount="$product->discount"
-          :image="$product->image" />
+          :image="$product->image"
+          :discount="$product->discount ?? 0" />
     </div>
   @endforeach
 </div>

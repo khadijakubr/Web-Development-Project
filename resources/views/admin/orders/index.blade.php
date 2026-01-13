@@ -1,101 +1,96 @@
 @extends('admin.layouts.app')
 
 @section('content')
-<div class="row mb-4">
-    <div class="col">
-        <h2 class="mb-0"><i class="bi bi-bag-check"></i> Orders Management</h2>
+<div class="admin-orders-container">
+    <!-- Page Header -->
+    <div class="admin-orders-header">
+        <div>
+            <h1 class="admin-page-title">Orders Management</h1>
+            <p class="admin-page-subtitle">Track and manage all customer orders</p>
+        </div>
+    </div>
+
+    <!-- Success Message -->
+    @if(session('success'))
+        <div class="admin-alert admin-alert-success">
+            <i class="bi bi-check-circle"></i>
+            <span>{{ session('success') }}</span>
+            <button type="button" class="admin-alert-close" onclick="this.parentElement.style.display='none';">×</button>
+        </div>
+    @endif
+
+    <!-- Orders Table -->
+    <div class="admin-card">
+        <div class="admin-card-body">
+            @if($orders->count())
+                <div class="orders-table-wrapper">
+                    <table class="orders-admin-table">
+                        <thead>
+                            <tr>
+                                <th width="50">ID</th>
+                                <th>Customer Name</th>
+                                <th>Email Address</th>
+                                <th width="120">Total Price</th>
+                                <th width="110">Status</th>
+                                <th width="130">Order Date</th>
+                                <th width="80" class="text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($orders as $order)
+                            <tr>
+                                <td>
+                                    <span class="order-id-badge">#{{ $order->id }}</span>
+                                </td>
+                                <td>
+                                    <p class="order-customer-name">{{ $order->user->name }}</p>
+                                </td>
+                                <td>
+                                    <p class="order-customer-email">{{ $order->user->email }}</p>
+                                </td>
+                                <td>
+                                    <span class="order-total-price">Rp {{ number_format($order->total_price, 0, ',', '.') }}</span>
+                                </td>
+                                <td class="text-center">
+                                    @php
+                                        $statusClass = 'status-' . $order->status;
+                                    @endphp
+                                    <span class="order-status-badge {{ $statusClass }}">
+                                        {{ ucfirst($order->status) }}
+                                    </span>
+                                </td>
+                                <td>
+                                    <small class="order-date">{{ $order->created_at->format('d M Y H:i') }}</small>
+                                </td>
+                                <td class="text-center">
+                                    <a 
+                                        href="{{ route('admin.orders.show', $order->id) }}" 
+                                        class="btn-admin btn-admin-secondary btn-sm"
+                                        title="View order details"
+                                    >
+                                        <i class="bi bi-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Pagination -->
+                @if($orders->hasPages())
+                    <div class="orders-pagination">
+                        {{ $orders->links('pagination::bootstrap-5') }}
+                    </div>
+                @endif
+            @else
+                <div class="empty-state">
+                    <i class="bi bi-inbox"></i>
+                    <p>No orders found</p>
+                    <small>Orders will appear here when customers place them</small>
+                </div>
+            @endif
+        </div>
     </div>
 </div>
-
-@if(session('success'))
-    <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
-        <i class="bi bi-check-circle"></i> {{ session('success') }}
-        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-    </div>
-@endif
-
-<div class="card">
-    <div class="card-body">
-        @if($orders->count())
-            <div class="table-responsive">
-                <table class="table table-hover align-middle">
-                    <thead class="table-light">
-                        <tr>
-                            <th width="60">#</th>
-                            <th>Customer</th>
-                            <th>Email</th>
-                            <th width="120">Total</th>
-                            <th width="120">Status</th>
-                            <th width="100">Date</th>
-                            <th width="100" class="text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach($orders as $order)
-                        <tr>
-                            <td>
-                                <span class="badge bg-secondary">#{{ $order->id }}</span>
-                            </td>
-                            <td>
-                                <strong>{{ $order->user->name }}</strong>
-                            </td>
-                            <td>
-                                <small class="text-muted">{{ $order->user->email }}</small>
-                            </td>
-                            <td>
-                                <span class="fw-bold text-success">
-                                    Rp {{ number_format($order->total_price, 0, ',', '.') }}
-                                </span>
-                            </td>
-                            <td>
-                                @php
-                                    $statusColors = [
-                                        'pending' => 'warning',
-                                        'paid' => 'info',
-                                        'processing' => 'primary',
-                                        'completed' => 'success',
-                                        'cancelled' => 'danger'
-                                    ];
-                                    $statusColor = $statusColors[$order->status] ?? 'secondary';
-                                @endphp
-                                <span class="badge bg-{{ $statusColor }} text-uppercase">
-                                    {{ $order->status }}
-                                </span>
-                            </td>
-                            <td>
-                                <small>{{ $order->created_at->format('d M Y H:i') }}</small>
-                            </td>
-                            <td class="text-center">
-                                <a 
-                                    href="{{ route('admin.orders.show', $order->id) }}" 
-                                    class="btn btn-sm btn-outline-primary"
-                                    title="View Details"
-                                >
-                                    <i class="bi bi-eye"></i> View
-                                </a>
-                            </td>
-                        </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Pagination -->
-            <nav aria-label="Page navigation" class="mt-4">
-                {{ $orders->links('pagination::bootstrap-5') }}
-            </nav>
-        @else
-            <div class="text-center py-5">
-                <i class="bi bi-inbox text-muted" style="font-size: 3rem;"></i>
-                <p class="text-muted mt-3">No orders found</p>
-            </div>
-        @endif
-    </div>
-</div>
-
-<style>
-    .table-hover tbody tr:hover {
-        background-color: rgba(52, 152, 219, 0.05);
-    }
-</style>
 @endsection

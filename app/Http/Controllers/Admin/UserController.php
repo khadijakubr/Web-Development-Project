@@ -15,6 +15,13 @@ class UserController extends Controller
         ]);
     }
 
+    public function show(User $user)
+    {
+        return view('admin.users.show', [
+            'user' => $user
+        ]);
+    }
+
     public function updateRole(Request $request, User $user)
     {
         $request->validate([
@@ -25,18 +32,19 @@ class UserController extends Controller
             'role' => $request->role
         ]);
 
-        return back()->with('success', 'Role user diperbarui');
+        return back()->with('success', 'User role has been updated successfully');
     }
 
     public function destroy(User $user)
     {
-        // cegah hapus diri sendiri
+        // Prevent deleting yourself
         if ($user->id === auth()->id()) {
-            return back()->with('error', 'Tidak bisa menghapus diri sendiri');
+            return back()->with('error', 'You cannot delete your own account');
         }
 
         $user->delete();
 
-        return back()->with('success', 'User dihapus');
+        return back()->with('success', 'User has been deleted successfully');
     }
 }
+

@@ -3,83 +3,107 @@
 @section('title', $product->name)
 
 @section('content')
-<div class="row">
-  <div class="col-md-8">
-    <div class="card">
-      <div class="card-body">
-        <h1>{{ $product->name }}</h1>
-        <p class="text-muted">Kategori: {{ $product->category->name }}</p>
-        
-        <hr>
-        
-        <h4>Deskripsi</h4>
-        <p>{{ $product->description }}</p>
-        
-        <hr>
-        
-        <h3 class="text-primary">Rp {{ number_format($product->price, 0, ',', '.') }}</h3>
-        
-        @auth
-          <!-- Form Add to Cart dengan quantity -->
-          <form action="{{ route('cart.add') }}" method="POST" class="mt-3">
-            @csrf
-            <input type="hidden" name="product_id" value="{{ $product->id }}">
-            
-            <div class="row g-2 align-items-end">
-              <div class="col-auto">
-                <label for="quantity" class="form-label">Jumlah</label>
-                <input type="number" name="quantity" id="quantity" class="form-control" value="1" min="1" max="100" style="width: 100px;">
-              </div>
-              <div class="col-auto">
-                <button type="submit" class="btn btn-primary btn-lg">🛒 Tambah ke Keranjang</button>
-              </div>
-            </div>
-          </form>
+<div class="product-detail-container">
+  <!-- Header -->
+  <div class="product-detail-header">
+    <a href="{{ route('products') }}" class="product-back-btn">
+      ← Back to Products
+    </a>
+  </div>
+
+  <!-- Main Layout -->
+  <div class="product-detail-layout">
+    <!-- Left: Product Image -->
+    <div class="product-image-section">
+      <div class="product-image-wrapper">
+        @if ($product->image)
+          <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="product-image" />
         @else
-          <a href="{{ route('login') }}" class="btn btn-primary btn-lg mt-3">Login untuk Membeli</a>
-        @endauth
+          <div class="product-image-placeholder">
+            📷 Product Image
+          </div>
+        @endif
       </div>
     </div>
-  </div>
-  
-  <div class="col-md-4">
-    <div class="card">
-      <div class="card-body">
-        <h5>Informasi Produk</h5>
-        <table class="table table-sm">
+
+    <!-- Right: Product Details -->
+    <div class="product-details-section">
+      <!-- Category Badge -->
+      <span class="product-category">{{ $product->category->name }}</span>
+
+      <!-- Product Name -->
+      <h1 class="product-name">{{ $product->name }}</h1>
+
+      <!-- Price Section -->
+      <div class="product-price-section">
+        @if ($product->discount > 0)
+          <p class="product-price-original">
+            Rp {{ number_format($product->price, 0, ',', '.') }}
+          </p>
+          <p class="product-price-current">
+            Rp {{ number_format($product->finalPrice(), 0, ',', '.') }}
+          </p>
+          <span class="product-discount-badge">
+            Save {{ $product->discount }}%
+          </span>
+        @else
+          <p class="product-price-current">
+            Rp {{ number_format($product->price, 0, ',', '.') }}
+          </p>
+        @endif
+      </div>
+
+      <!-- Description -->
+      <div>
+        <p class="product-description-label">Product Description</p>
+        <p class="product-description">{{ $product->description }}</p>
+      </div>
+
+      <!-- Add to Cart Section -->
+      @auth
+        <div class="product-cart-section">
+          <form action="{{ route('cart.add') }}" method="POST">
+            @csrf
+            <input type="hidden" name="product_id" value="{{ $product->id }}">
+
+            <div class="quantity-control-product">
+              <label class="quantity-label">Quantity</label>
+              <div class="quantity-input-wrapper">
+                <button type="button" class="qty-decrease">−</button>
+                <input type="number" name="quantity" id="quantity" value="1" min="1" max="100">
+                <button type="button" class="qty-increase">+</button>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary add-to-cart-btn">
+              🛒 Add to Cart
+            </button>
+          </form>
+        </div>
+      @else
+        <div class="product-login-cta">
+          <p>Please login to purchase this product</p>
+          <a href="{{ route('login') }}" class="btn btn-primary">Login Now</a>
+        </div>
+      @endauth
+
+      <!-- Product Info -->
+      <div class="product-info-section">
+        <h5 class="product-info-title">Product Information</h5>
+        <table class="product-info-table">
           <tr>
-            <td>Kategori</td>
-            <td><strong>{{ $product->category->name }}</strong></td>
+            <td>Category</td>
+            <td>{{ $product->category->name }}</td>
           </tr>
           <tr>
-            <td>Harga</td>
-            @if ($product->discount > 0)
-              <p class="text-muted text-decoration-line-through mb-1">
-                Rp {{ number_format($product->price, 0, ',', '.') }}
-              </p>
-
-              <h3 class="text-success">
-                Rp {{ number_format($product->finalPrice(), 0, ',', '.') }}
-              </h3>
-
-              <span class="badge bg-danger">
-                Diskon {{ $product->discount }}%
-              </span>
-            @else
-              <h3 class="text-primary">
-                Rp {{ number_format($product->price, 0, ',', '.') }}
-              </h3>
-            @endif
+            <td>Original Price</td>
+            <td>Rp {{ number_format($product->price, 0, ',', '.') }}</td>
           </tr>
           <tr>
-            <td>Ditambahkan</td>
+            <td>Added</td>
             <td>{{ $product->created_at->format('d M Y') }}</td>
           </tr>
         </table>
-        
-        <a href="{{ route('products') }}" class="btn btn-outline-secondary w-100 mt-3">
-          ← Kembali ke Daftar Produk
-        </a>
       </div>
     </div>
   </div>

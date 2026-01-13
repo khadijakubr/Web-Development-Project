@@ -61,7 +61,7 @@ class ProductController extends Controller
 
         return redirect()
             ->route('admin.products.index')
-            ->with('success', 'Product created successfully!');
+            ->with('success', 'Produk berhasil dibuat!');
     }
 
     // FORM edit
@@ -110,7 +110,7 @@ class ProductController extends Controller
         $product->update($data);
 
         return redirect()->route('admin.products.index')
-            ->with('success', 'Product updated successfully!');
+            ->with('success', 'Product berhasi diperbarui!');
     }
 
     // HAPUS produk
@@ -123,6 +123,6 @@ class ProductController extends Controller
         $productName = $product->name;
         $product->delete();
 
-        return back()->with('success', "Product '{$productName}' deleted successfully!");
+        return back()->with('success', "Produk '{$productName}' berhasil dihapus!");
     }
 }

@@ -1,89 +1,122 @@
-@extends('layouts.app')
+<!-- @extends('layouts.app')
+
+@section('title', 'Products')
 
 @section('content')
-<div class="row mb-4">
-  <div class="col-md-3">
-    <!-- Filter card -->
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Filter</h5>
-        <form method="get" action="{{ route('products.index') }}">
+<div class="products-index-container"> -->
+  <!-- Page Header -->
+  <!-- <div class="products-header">
+    <h1 class="products-title">Shop Products</h1>
+    <p class="products-subtitle">Browse our curated collection of quality products</p>
+  </div>
+
+  <div class="products-layout"> -->
+    <!-- Left: Filter Sidebar -->
+    <!-- <aside class="products-filter-sidebar">
+      <div class="filter-card">
+        <h3 class="filter-title">Filters</h3>
+        
+        <form method="get" action="{{ route('products') }}" class="filter-form"> -->
           <!-- Keep q param when filtering -->
-          <input type="hidden" name="q" value="{{ request('q') }}">
-          <div class="mb-3">
-            <label>Kategori</label>
-            <select name="category_id" class="form-select">
-              <option value="">Semua</option>
+          <!-- <input type="hidden" name="q" value="{{ request('q') }}"> -->
+          
+          <!-- Category Filter -->
+          <!-- <div class="filter-group">
+            <label class="filter-label">Category</label>
+            <select name="category_id" class="form-select form-select-sm">
+              <option value="">All Categories</option>
               @foreach($categories as $cat)
                 <option value="{{ $cat->id }}" {{ request('category_id') == $cat->id ? 'selected' : '' }}>
                   {{ $cat->name }}
                 </option>
               @endforeach
             </select>
+          </div> -->
+
+          <!-- Price Range Filter -->
+          <!-- <div class="filter-group">
+            <label class="filter-label">Min Price</label>
+            <input type="number" name="price_min" class="form-control form-control-sm" value="{{ request('price_min') }}" placeholder="0">
           </div>
 
-          <div class="mb-3">
-            <label>Harga (min)</label>
-            <input type="number" name="price_min" class="form-control" value="{{ request('price_min') }}">
-          </div>
+          <div class="filter-group">
+            <label class="filter-label">Max Price</label>
+            <input type="number" name="price_max" class="form-control form-control-sm" value="{{ request('price_max') }}" placeholder="999999">
+          </div> -->
 
-          <div class="mb-3">
-            <label>Harga (max)</label>
-            <input type="number" name="price_max" class="form-control" value="{{ request('price_max') }}">
-          </div>
-
-          <div class="mb-3">
-            <label>Urutkan</label>
-            <select name="sort" class="form-select">
+          <!-- Sort Filter -->
+          <!-- <div class="filter-group">
+            <label class="filter-label">Sort By</label>
+            <select name="sort" class="form-select form-select-sm">
               <option value="">Default</option>
-              <option value="name_asc" {{ request('sort')=='name_asc' ? 'selected' : '' }}>Nama A-Z</option>
-              <option value="name_desc" {{ request('sort')=='name_desc' ? 'selected' : '' }}>Nama Z-A</option>
-              <option value="price_asc" {{ request('sort')=='price_asc' ? 'selected' : '' }}>Harga Terendah</option>
-              <option value="price_desc" {{ request('sort')=='price_desc' ? 'selected' : '' }}>Harga Tertinggi</option>
+              <option value="name_asc" {{ request('sort') == 'name_asc' ? 'selected' : '' }}>Name (A-Z)</option>
+              <option value="name_desc" {{ request('sort') == 'name_desc' ? 'selected' : '' }}>Name (Z-A)</option>
+              <option value="price_asc" {{ request('sort') == 'price_asc' ? 'selected' : '' }}>Price (Low to High)</option>
+              <option value="price_desc" {{ request('sort') == 'price_desc' ? 'selected' : '' }}>Price (High to Low)</option>
             </select>
           </div>
 
-          <button class="btn btn-primary w-100">Terapkan</button>
+          <button type="submit" class="btn btn-primary w-100">Apply Filters</button>
         </form>
       </div>
-    </div>
-  </div>
+    </aside> -->
 
-  <div class="col-md-9">
-    <!-- Banner / highlight untuk membuat home lebih menarik -->
-    <div class="mb-4 p-4 bg-primary text-white rounded">
-      <h2>Promo Minggu Ini</h2>
-      <p>Temukan produk pilihan dengan harga terbaik!</p>
-    </div>
-
-    <!-- Products grid -->
-    <div class="row">
-      @forelse($products as $product)
-        <div class="col-md-4 mb-4">
-          <div class="card h-100">
-            <img src="{{ $product->image ?? 'https://via.placeholder.com/400x250' }}" class="card-img-top" alt="{{ $product->name }}">
-            <div class="card-body d-flex flex-column">
-              <h5 class="card-title">{{ $product->name }}</h5>
-              <p class="card-text text-muted small">{{ $product->category->name ?? '-' }}</p>
-              <p class="card-text mb-2">{{ Str::limit($product->description, 80) }}</p>
-              <div class="mt-auto d-flex justify-content-between align-items-center">
-                <strong>Rp {{ number_format($product->price, 0, ',', '.') }}</strong>
-                <a href="#" class="btn btn-sm btn-outline-primary">Detail</a>
+    <!-- Right: Products Grid -->
+    <!-- <main class="products-main"> -->
+      <!-- Products Grid -->
+      <!-- @forelse($products as $product)
+        <div class="product-card"> -->
+          <!-- Product Image -->
+          <!-- <div class="product-card-image">
+            @if ($product->image)
+              <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="product-image">
+            @else
+              <div class="product-image-placeholder">
+                📷
               </div>
-            </div>
+            @endif
+          </div> -->
+
+          <!-- Product Info -->
+          <!-- <div class="product-card-body">
+            <span class="product-category-badge">{{ $product->category->name ?? 'Uncategorized' }}</span>
+            
+            <h3 class="product-card-title">{{ $product->name }}</h3>
+            
+            <p class="product-card-description">{{ Str::limit($product->description, 80) }}</p> -->
+
+            <!-- Price Section -->
+            <!-- <div class="product-card-price">
+              @if ($product->discount > 0)
+                <p class="price-original">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
+                <p class="price-final">Rp {{ number_format($product->finalPrice(), 0, ',', '.') }}</p>
+                <span class="discount-badge">{{ $product->discount }}% off</span>
+              @else
+                <p class="price-final">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
+              @endif
+            </div> -->
+
+            <!-- Action Button -->
+            <!-- <a href="{{ route('products.show', $product->id) }}" class="btn btn-outline-primary btn-sm w-100">
+              View Details
+            </a>
           </div>
         </div>
       @empty
-        <div class="col-12">
-          <div class="alert alert-warning">Produk tidak ditemukan.</div>
+        <div class="products-empty">
+          <p class="empty-icon">📦</p>
+          <p class="empty-text">No products found</p>
+          <p class="empty-subtext">Try adjusting your filters</p>
         </div>
       @endforelse
-    </div>
+    </main>
+  </div> -->
 
-    <!-- Pagination -->
-    <div class="d-flex justify-content-center">
+  <!-- Pagination -->
+  <!-- @if ($products->count() > 0)
+    <div class="products-pagination">
       {{ $products->links() }}
     </div>
-  </div>
+  @endif
 </div>
-@endsection
+@endsection -->
