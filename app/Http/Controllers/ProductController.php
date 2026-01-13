@@ -68,6 +68,45 @@ class ProductController extends Controller
         if (!$product) {
             return redirect()->route('products.index')->with('error', 'Produk tidak ditemukan.');
         }
-        return view('products.show', compact('product'));
+        
+        // Load reviews with pagination (2 per page)
+        $reviews = $product->reviews()
+            ->with('user')
+            ->latest()
+            ->paginate(2, ['*'], 'review_page');
+        
+        // Calculate average rating
+        $averageRating = $product->reviews()->avg('rating');
+        $totalReviews = $product->reviews()->count();
+        
+        // Check if user has completed orders with this product (for write review button)
+        $completedOrderWithProduct = null;
+        $userReview = null;
+        
+        if (auth()->check()) {
+            $completedOrderWithProduct = auth()->user()->orders()
+                ->where('status', 'completed')
+                ->whereHas('items', function($q) use ($product) {
+                    $q->where('product_id', $product->id);
+                })
+                ->first();
+            
+            // Check if user already reviewed this product
+            if ($completedOrderWithProduct) {
+                $userReview = $product->reviews()
+                    ->where('user_id', auth()->id())
+                    ->where('order_id', $completedOrderWithProduct->id)
+                    ->first();
+            }
+        }
+        
+        return view('products.show', compact(
+            'product',
+            'reviews',
+            'averageRating',
+            'totalReviews',
+            'completedOrderWithProduct',
+            'userReview'
+        ));
     }
 }

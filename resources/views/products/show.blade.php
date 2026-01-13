@@ -105,6 +105,75 @@
           </tr>
         </table>
       </div>
+
+      <!-- Reviews Section -->
+      <div class="product-info-section reviews-info-section">
+        <!-- Reviews Header -->
+        <div class="reviews-info-header">
+          <div class="reviews-info-left">
+            <h5 class="product-info-title">Customer Reviews</h5>
+            <div class="reviews-info-stats">
+              @if($totalReviews > 0)
+                <span class="rating-display">★ {{ number_format($averageRating, 1) }}</span>
+                <span class="reviews-count">({{ $totalReviews }} {{ $totalReviews === 1 ? 'review' : 'reviews' }})</span>
+              @endif
+            </div>
+          </div>
+
+          <!-- Write Review Button -->
+          @auth
+            <div class="write-review-button-container">
+              @if($completedOrderWithProduct && !$userReview)
+                <a href="{{ route('reviews.create', ['order' => $completedOrderWithProduct->id, 'product' => $product->id]) }}" class="btn-write-review">
+                  Write Review
+                </a>
+              @elseif($userReview)
+                <button type="button" class="btn-write-review" disabled title="You have already reviewed this product">
+                  Review Posted
+                </button>
+              @endif
+            </div>
+          @endauth
+        </div>
+
+        <!-- Reviews List -->
+        @if($reviews->count() > 0)
+          <div class="reviews-info-list">
+            @foreach($reviews as $review)
+              <div class="review-info-item">
+                <div class="review-info-header-row">
+                  <strong class="review-user-name">{{ $review->user->name }}</strong>
+                  <div class="review-actions">
+                    <span class="review-date">{{ $review->created_at->format('d M Y') }}</span>
+                    @if(auth()->check() && auth()->id() === $review->user_id)
+                      <a href="{{ route('reviews.edit', $review->id) }}" class="review-edit-btn" title="Edit review">Edit</a>
+                    @endif
+                  </div>
+                </div>
+                <div class="review-info-rating">
+                  @for ($i = 1; $i <= 5; $i++)
+                    @if ($i <= $review->rating)
+                      <span class="star-filled">★</span>
+                    @else
+                      <span class="star-empty">☆</span>
+                    @endif
+                  @endfor
+                </div>
+                @if($review->comment)
+                  <p class="review-info-comment">{{ $review->comment }}</p>
+                @endif
+              </div>
+            @endforeach
+          </div>
+
+          <!-- Pagination -->
+          <div class="reviews-info-pagination">
+            {{ $reviews->links('pagination::bootstrap-4') }}
+          </div>
+        @else
+          <p class="no-reviews-info-message">No reviews yet. Be the first to review this product!</p>
+        @endif
+      </div>
     </div>
   </div>
 </div>

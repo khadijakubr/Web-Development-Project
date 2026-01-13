@@ -9,6 +9,7 @@ export default defineConfig({
                 'resources/css/admin.css',
                 'resources/css/products.css',
                 'resources/css/product-detail.css',
+                'resources/css/reviews.css',
                 'resources/css/fonts.css',
                 'resources/css/dark-mode.css',
                 'resources/js/app.js',

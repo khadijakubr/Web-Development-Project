@@ -17,6 +17,9 @@
     <!-- Vite -->
     @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/css/products.css', 'resources/css/fonts.css', 'resources/css/product-detail.css', 'resources/js/promo.js'])
     
+    <!-- Reviews CSS -->
+    <link href="{{ asset('css/reviews.css') }}" rel="stylesheet">
+    
     <!-- Apply dark mode immediately -->
     <script>
         (function() {

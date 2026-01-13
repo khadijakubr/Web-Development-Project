@@ -24,13 +24,21 @@
             <h3 class="product-title">{{ $name }}</h3>
         </a>
         
-        <!-- Star Rating (5 stars) -->
+        <!-- Star Rating with Average -->
         <div class="product-rating">
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
-            <span class="star">★</span>
+            @php
+                $product = \App\Models\Product::find($id);
+                $avgRating = $product->reviews()->avg('rating');
+                $reviewCount = $product->reviews()->count();
+            @endphp
+            @if($reviewCount > 0)
+                <span class="star">★</span>
+                <span class="rating-value">{{ number_format($avgRating, 1) }}</span>
+                <span class="review-count">({{ $reviewCount }})</span>
+            @else
+                <span class="star-empty">☆</span>
+                <span class="no-reviews-text">No reviews yet</span>
+            @endif
         </div>
         
         <!-- Product Price with Discount -->

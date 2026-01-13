@@ -58,6 +58,24 @@
                                     <td>
                                         <p class="item-name">{{ $item->product->name }}</p>
                                         <small class="item-category">{{ $item->product->category->name }}</small>
+                                        @if($order->status == 'completed')
+                                            @php
+                                                $userReview = \App\Models\Review::where([
+                                                    'user_id' => auth()->id(),
+                                                    'product_id' => $item->product->id,
+                                                    'order_id' => $order->id,
+                                                ])->first();
+                                            @endphp
+                                            @if(!$userReview)
+                                                <br>
+                                                <a href="{{ route('reviews.create', ['order' => $order->id, 'product' => $item->product->id]) }}" class="btn-write-review btn-sm">
+                                                    Write Review
+                                                </a>
+                                            @else
+                                                <br>
+                                                <span class="review-posted-badge">✓ Reviewed</span>
+                                            @endif
+                                        @endif
                                     </td>
                                     <td>
                                         <span class="item-price">

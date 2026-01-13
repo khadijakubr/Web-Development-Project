@@ -1,0 +1,514 @@
+/* ============================================
+   REVIEWS SYSTEM - Minimalist Monochrome Design
+   ============================================ */
+
+/* Reviews Info Section (aligned with Product Info) */
+.reviews-info-section {
+    margin-top: 1.5rem;
+}
+
+.reviews-info-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.reviews-info-left {
+    flex: 1;
+}
+
+.reviews-info-stats {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.rating-display {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #000;
+    letter-spacing: -0.3px;
+}
+
+.reviews-count {
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.no-reviews {
+    font-size: 0.85rem;
+    color: #999;
+    font-style: italic;
+}
+
+/* Write Review Button */
+.write-review-button-container {
+    margin-bottom: 0;
+    display: flex;
+    align-items: center;
+}
+
+.btn-write-review {
+    display: inline-block;
+    padding: 0.6rem 1.2rem;
+    background-color: #000;
+    color: #fff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid #000;
+    border-radius: 2px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-write-review:hover:not(:disabled) {
+    background-color: #333;
+    border-color: #333;
+}
+
+.btn-write-review:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    background-color: #e0e0e0;
+    color: #333;
+    border-color: #d0d0d0;
+}
+
+/* Reviews Info List */
+.reviews-info-list {
+    margin-top: 1rem;
+}
+
+/* Review Info Item */
+.review-info-item {
+    padding: 1rem 0;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.review-info-item:last-child {
+    border-bottom: none;
+}
+
+/* Review Info Header Row */
+.review-info-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.review-user-name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #000;
+    letter-spacing: -0.2px;
+}
+
+.review-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.review-date {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.review-edit-btn {
+    font-size: 0.75rem;
+    color: #000;
+    text-decoration: none;
+    font-weight: 600;
+    border-bottom: 1px solid #000;
+    padding-bottom: 0.1rem;
+    transition: all 0.3s ease;
+}
+
+.review-edit-btn:hover {
+    color: #666;
+    border-bottom-color: #666;
+}
+
+/* Review Info Rating */
+.review-info-rating {
+    display: flex;
+    gap: 0.2rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+.star-filled {
+    color: #000;
+    line-height: 1;
+}
+
+.star-empty {
+    color: #d0d0d0;
+    line-height: 1;
+}
+
+/* Review Info Comment */
+.review-info-comment {
+    font-size: 0.85rem;
+    color: #333;
+    line-height: 1.5;
+    margin: 0.5rem 0 0 0;
+    word-break: break-word;
+}
+
+/* No Reviews Message */
+.no-reviews-info-message {
+    font-size: 0.85rem;
+    color: #999;
+    font-style: italic;
+    margin: 1rem 0 0 0;
+}
+
+/* Reviews Info Pagination */
+.reviews-info-pagination {
+    margin-top: 1.5rem;
+}
+
+.reviews-info-pagination nav {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.reviews-info-pagination .pagination {
+    display: flex;
+    list-style: none;
+    gap: 0.2rem;
+    padding: 0;
+    margin: 0;
+}
+
+.reviews-info-pagination .page-item {
+    margin: 0;
+}
+
+.reviews-info-pagination .page-link {
+    display: inline-block;
+    padding: 0.35rem 0.6rem;
+    border: 1px solid #d0d0d0;
+    background-color: #fff;
+    color: #000;
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border-radius: 2px;
+    min-width: auto;
+    text-align: center;
+}
+
+.reviews-info-pagination .page-link:hover {
+    background-color: #f0f0f0;
+    border-color: #000;
+}
+
+.reviews-info-pagination .page-item.active .page-link {
+    background-color: #000;
+    color: #fff;
+    border-color: #000;
+}
+
+.reviews-info-pagination .page-item.disabled .page-link {
+    opacity: 0.5;
+    cursor: not-allowed;
+    color: #999;
+    background-color: #f5f5f5;
+}
+
+/* ============================================
+   REVIEW FORM STYLING
+   ============================================ */
+
+.review-form-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.review-form-header {
+    margin-bottom: 2rem;
+}
+
+.review-back-btn {
+    display: inline-block;
+    color: #000;
+    text-decoration: none;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+    transition: color 0.3s ease;
+}
+
+.review-back-btn:hover {
+    color: #666;
+}
+
+.review-form-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #000;
+    margin: 1rem 0 0.5rem 0;
+    letter-spacing: -0.5px;
+}
+
+.review-form-subtitle {
+    font-size: 1rem;
+    color: #666;
+    margin: 0;
+}
+
+/* Review Form Card */
+.review-form-card {
+    border: 1px solid #e0e0e0;
+    padding: 2rem;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* Form Groups */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-label {
+    display: block;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+}
+
+/* Star Rating Input */
+.rating-group {
+    margin-bottom: 2rem;
+}
+
+.star-rating-input {
+    display: flex;
+    gap: 0.75rem;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    width: fit-content;
+}
+
+.star-input {
+    display: none;
+}
+
+.star-label {
+    font-size: 2rem;
+    color: #d0d0d0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    line-height: 1;
+}
+
+.star-input:checked ~ .star-label,
+.star-label:hover,
+.star-label:hover ~ .star-label,
+.star-input:checked ~ .star-label:hover ~ .star-label {
+    color: #000;
+}
+
+/* Textarea */
+.form-textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d0d0d0;
+    border-radius: 2px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: vertical;
+    line-height: 1.5;
+    color: #333;
+    background-color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.form-textarea:focus {
+    outline: none;
+    border-color: #000;
+    box-shadow: inset 0 0 0 1px #000;
+}
+
+.form-textarea.is-invalid {
+    border-color: #dc3545;
+}
+
+.form-textarea::placeholder {
+    color: #999;
+}
+
+/* Input Error */
+.input-error {
+    color: #dc3545;
+    font-size: 0.85rem;
+    margin-top: 0.25rem;
+}
+
+/* Form Actions */
+.form-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 2rem;
+    justify-content: flex-end;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 2px;
+    border: 1px solid;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+}
+
+.btn-primary {
+    border-color: #000;
+    background-color: #000;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background-color: #333;
+    border-color: #333;
+}
+
+.btn-secondary {
+    border-color: #d0d0d0;
+    background-color: #fff;
+    color: #000;
+}
+
+.btn-secondary:hover {
+    border-color: #000;
+    background-color: #f0f0f0;
+}
+
+/* Product Card Rating Enhancement */
+.product-rating {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0.5rem 0;
+}
+
+.product-rating .star {
+    font-size: 1.1rem;
+    color: #000;
+}
+
+.rating-value {
+    font-weight: 600;
+    color: #000;
+}
+
+.review-count {
+    color: #999;
+    font-size: 0.85rem;
+}
+
+.no-reviews-text {
+    color: #999;
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .reviews-info-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .review-info-header-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .review-form-card {
+        padding: 1.5rem;
+    }
+
+    .form-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .star-rating-input {
+        gap: 0.5rem;
+    }
+
+    .star-label {
+        font-size: 1.75rem;
+    }
+
+    .review-form-title {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .reviews-info-section {
+        margin-top: 1rem;
+    }
+
+    .review-info-item {
+        padding: 0.75rem 0;
+    }
+
+    .review-user-name {
+        font-size: 0.85rem;
+    }
+
+    .review-info-comment {
+        font-size: 0.8rem;
+    }
+
+    .btn-write-review {
+        width: 100%;
+        text-align: center;
+    }
+
+    .star-rating-input {
+        gap: 0.4rem;
+    }
+
+    .star-label {
+        font-size: 1.5rem;
+    }
+
+    .review-form-title {
+        font-size: 1.25rem;
+    }
+
+    .review-form-card {
+        padding: 1rem;
+    }
+
+    .btn {
+        padding: 0.65rem 1rem;
+        font-size: 0.9rem;
+    }
+}

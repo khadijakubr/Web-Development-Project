@@ -37,7 +37,7 @@
               @elseif($order->status == 'processing')
                 <span class="status-badge status-processing">Processing</span>
               @elseif($order->status == 'completed')
-                <span class="status-badge status-completed">Delivered</span>
+                <span class="status-badge status-completed">Completed</span>
               @else
                 <span class="status-badge status-cancelled">Cancelled</span>
               @endif

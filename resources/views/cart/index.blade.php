@@ -50,7 +50,6 @@
                     <div>
                       <span class="original-price" style="text-decoration: line-through; color: #999;">Rp {{ number_format($item->product->price, 0, ',', '.') }}</span>
                       <span class="price-value">Rp {{ number_format($item->product->price - ($item->product->price * $item->discount / 100), 0, ',', '.') }}</span>
-                      <span class="discount-badge">-{{ $item->discount }}%</span>
                     </div>
                   @else
                     <span class="price-value">Rp {{ number_format($item->product->price, 0, ',', '.') }}</span>

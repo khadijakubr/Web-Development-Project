@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -47,6 +48,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::prefix('orders')->controller(OrderController::class)->group(function () {
         Route::get('/', 'index')->name('orders.index');
         Route::get('/show/{id}', 'show')->name('orders.show');
+    });
+    
+    // Review Routes
+    Route::prefix('reviews')->controller(ReviewController::class)->group(function () {
+        Route::get('/create/{order}/{product}', 'create')->name('reviews.create');
+        Route::post('/', 'store')->name('reviews.store');
+        Route::get('/{review}/edit', 'edit')->name('reviews.edit');
+        Route::put('/{review}', 'update')->name('reviews.update');
     });
     
 });
