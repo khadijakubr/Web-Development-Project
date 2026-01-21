@@ -3,6 +3,8 @@
 **Classic e-commerce using Laravel**  
 A simple e-commerce web application built with Laravel — ideal for learning MVC structure, CRUD operations, authentication, and basic commerce workflows.
 
+**Link website yang telah di hosting: https://bookverse.web.id/**
+
 ---
 
 ## 🚀 Overview
@@ -15,7 +17,8 @@ Tujuan utama project ini adalah praktik langsung dalam membangun fitur umum pada
 - Autentikasi (login/register) menggunakan laravel breeze
 - Admin dashboard
 
-Proyek ini dibuat untuk mengerjakan tugas mata kuliad web development
+Proyek ini dibuat untuk mengerjakan tugas mata kuliah web development
+
 Video Presentasi : -
 
 ---
